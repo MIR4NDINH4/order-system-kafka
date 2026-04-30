@@ -2,22 +2,23 @@ package com.andre.producer.service;
 
 import com.andre.producer.exception.OrderSendException;
 import com.andre.producer.model.Order;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-
-    public OrderService(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
+    private final ObjectMapper objectMapper;
 
     public void enviarPedido(Order pedido) {
         try {
-            kafkaTemplate.send("pedidos", pedido.toString());
-            System.out.println("Pedido enviado: " + pedido);
+            String json = objectMapper.writeValueAsString(pedido);
+            kafkaTemplate.send("pedidos", json);
+            System.out.println("Pedido enviado: " + json);
         } catch (Exception e) {
             throw new OrderSendException("Erro ao enviar pedido ao Kafka", e);
         }
