@@ -56,6 +56,7 @@ Pedido recebido: Order(id=1, produto=Pizza, quantidade=2)
 
 ## Estrutura do projeto
 
+```
 order-system-kafka/
 ├── docker-compose.yml
 ├── producer/
@@ -73,16 +74,17 @@ order-system-kafka/
 │           ├── OrderNotFoundException.java
 │           └── OrderSendException.java
 └── consumer/
-├── Dockerfile
-└── src/main/java/com/andre/consumer/
-├── service/
-│   └── OrderService.java
-├── model/
-│   └── Order.java
-└── exception/
-├── GlobalExceptionHandler.java
-├── OrderException.java
-└── OrderProcessException.java
+    ├── Dockerfile
+    └── src/main/java/com/andre/consumer/
+        ├── service/
+        │   └── OrderService.java
+        ├── model/
+        │   └── Order.java
+        └── exception/
+            ├── GlobalExceptionHandler.java
+            ├── OrderException.java
+            └── OrderProcessException.java
+```
 
 ## Autor
 
